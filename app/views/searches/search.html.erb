@@ -4,3 +4,14 @@
   <%= text_field_tag :zipcode %>
   <%= submit_tag "Search!" %>
 <% end %>
+def foursquare
+    Faraday.get 'https://api.foursquare.com/v2/venues/search' do |req|
+      req.params['client_id'] = QMKX4LQSHZBCG2D0BTYCD2GDA4GDK4NQGWBFJ5O0S1KHG1UT
+
+      req.params['client_secret'] = UIKA0KZCBE4NATZYU3KMZHCTGQNZEWHZRVXVIKITJ5MYRNC3
+      req.params['v'] = '20160201'
+      req.params['near'] = params[:zipcode]
+      req.params['query'] = 'coffee shop'
+    end
+    render 'search'
+  end
